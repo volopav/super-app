@@ -4,6 +4,7 @@ angular.module( 'SuperApp', [
   'SuperApp.home',
   'SuperApp.about',
   'SuperApp.todo',
+  'SuperApp.phonecat',
   'ui.state',
   'ui.route'
 ])
