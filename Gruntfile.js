@@ -148,6 +148,16 @@ module.exports = function ( grunt ) {
             expand: true
           }
         ]
+      },
+      build_fixturejs: {
+        files: [
+          {
+            src: [ '<%= app_files.jsfixture %>' ],
+            dest: '<%= build_dir %>/',
+            cwd: '.',
+            expand: true
+          }
+        ]
       }
     },
 
@@ -179,7 +189,8 @@ module.exports = function ( grunt ) {
           'module.prefix', 
           '<%= build_dir %>/src/**/*.js', 
           '<%= html2js.app.dest %>', 
-          '<%= html2js.common.dest %>', 
+          '<%= html2js.common.dest %>',
+          '!<%= build_dir %>/src/**/*.fixture.js',
           'module.suffix' 
         ],
         dest: '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.js'
@@ -282,6 +293,12 @@ module.exports = function ( grunt ) {
       test: [
         '<%= app_files.jsunit %>'
       ],
+      fixture: [
+        '<%= app_files.jsfixture %>'
+      ],
+      scenario: [
+        '<%= app_files.jsscenario %>'
+      ],
       gruntfile: [
         'Gruntfile.js'
       ],
@@ -358,6 +375,11 @@ module.exports = function ( grunt ) {
       },
       continuous: {
         singleRun: true
+      },
+      e2e: {
+        options: {
+          configFile: '<%= build_dir %>/karma-e2e.js'
+        }
       }
     },
 
@@ -378,10 +400,12 @@ module.exports = function ( grunt ) {
         src: [
           '<%= vendor_files.js %>',
           '<%= build_dir %>/src/**/*.js',
+          '!<%= build_dir %>/src/**/*.fixture.js',
           '<%= html2js.common.dest %>',
           '<%= html2js.app.dest %>',
           '<%= vendor_files.css %>',
-          '<%= recess.build.dest %>'
+          '<%= recess.build.dest %>',
+          '<%= build_dir %>/src/**/*.fixture.js'
         ]
       },
 
@@ -413,7 +437,8 @@ module.exports = function ( grunt ) {
           '<%= html2js.common.dest %>',
           '<%= test_files.js %>'
         ]
-      }
+      },
+      e2e: {}
     },
 
     /**
@@ -535,6 +560,26 @@ module.exports = function ( grunt ) {
         options: {
           livereload: false
         }
+      },
+
+      /**
+       * When a JavaScript data fixture file changes, we want to lint it and then
+       * copy it to the build folder.
+       */
+      jsfixture: {
+        files: [
+          '<%= app_files.jsfixture %>'
+        ],
+        tasks: [ 'jshint:fixture', 'copy:build_fixturejs' ]
+      },
+      /**
+       * When a JavaScript e2e test file changes we just lint it.
+       */
+      jsscenario: {
+        files: [
+          '<%= app_files.jsscenario %>'
+        ],
+        tasks: [ 'jshint:scenario' ]
       }
     }
   };
@@ -562,8 +607,8 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'recess:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
-    'karma:continuous' 
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_fixturejs',
+    'index:build', 'karmaconfig', 'karma:continuous', 'karma:e2e'
   ]);
 
   /**
@@ -627,8 +672,8 @@ module.exports = function ( grunt ) {
    */
   grunt.registerMultiTask( 'karmaconfig', 'Process karma config templates', function () {
     var jsFiles = filterForJS( this.filesSrc );
-    
-    grunt.file.copy( 'karma/karma-unit.tpl.js', grunt.config( 'build_dir' ) + '/karma-unit.js', { 
+
+    grunt.file.copy( 'karma/karma-' + this.target + '.tpl.js', grunt.config( 'build_dir' ) + '/karma-' + this.target + '.js', {
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
