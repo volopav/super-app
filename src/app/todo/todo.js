@@ -8,7 +8,7 @@ angular.module('SuperApp.todo', [
     views: {
       "main": {
         controller: 'TodoCtrl',
-        templateUrl: 'todo/todo.tpl.html'
+        templateUrl: 'todo/templates/todo.tpl.html'
       }
     },
     data: {pageTitle: 'Todo'}
@@ -48,13 +48,13 @@ angular.module('SuperApp.todo', [
 .directive('field', function() {
   return {
     restrict: 'E',
-    templateUrl: 'todo/field.tpl.html'
+    templateUrl: 'todo/templates/field.tpl.html'
   };
 })
 
 .directive('tasks', function() {
   return {
     restrict: 'E',
-    templateUrl: 'todo/tasks.tpl.html'
+    templateUrl: 'todo/templates/tasks.tpl.html'
   };
 });
