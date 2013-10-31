@@ -1,0 +1,8 @@
+<div class="todo">
+  <p class="count-{{tasks.length > 0 ? 'hidden' : 'visible'}}">Nothing to do yet.</p>
+  <p class="count-{{tasks.length > 0 ? 'visible' : 'hidden'}}">{{remaining()}} of {{tasks.length}} left.</p>
+  <tasks></tasks>
+  <field></field>
+
+  <button ng-click="deleteCompleted()">Deleted completed</button>
+</div>
