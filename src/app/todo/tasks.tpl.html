@@ -1,5 +1,5 @@
 <ul class="tasks">
-  <li class="task {{task.done ? 'done' : ''}}" ng-repeat="task in tasks">
+  <li class="done-{{task.done}}" ng-repeat="task in tasks">
     <input type="checkbox" ng-model="task.done">
     <span>{{task.description}}</span>
   </li>
