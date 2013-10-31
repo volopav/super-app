@@ -1,7 +1,9 @@
 <div class="todo">
   <p>{{remaining()}} of {{tasks.length}} left.</p>
   <tasks></tasks>
-  <field></field>
-
-  <button ng-click="deleteCompleted()">Deleted completed</button>
+  <form>
+    <field></field>
+    <br><br>
+    <button ng-click="deleteCompleted()" class="btn btn-danger">Deleted completed</button>
+  </form>
 </div>

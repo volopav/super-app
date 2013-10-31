@@ -1,6 +1,5 @@
 angular.module( 'SuperApp.about', [
   'ui.state',
-  'placeholders',
   'ui.bootstrap'
 ])
 
