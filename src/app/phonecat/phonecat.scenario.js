@@ -1,9 +1,11 @@
 describe('Phone Catalog Module', function() {
+  var baseUrl = '/angular/super-app/build/';
+  var route = '/phonecat';
 
   describe('Phone List view', function(){
 
     beforeEach(function() {
-      browser().navigateTo('/angular/super-app/build/#/phonecat');
+      browser().navigateTo(baseUrl + '#' + route);
     });
 
     it('should filter the phone list as user types into the search box', function() {
@@ -37,7 +39,12 @@ describe('Phone Catalog Module', function() {
     it('should render phone specific link', function() {
       input('query').enter('nexus');
       element('.phones li a').click();
-      expect(browser().location().url()).toBe('/phonecat/nexus-s');
+      expect(browser().location().url()).toBe(route + '/nexus-s');
+    });
+
+    it('should redirect base-url/ to base-url/#home', function() {
+      browser().navigateTo(baseUrl);
+      expect(browser().location().url()).toBe('/home');
     });
   });
 });
