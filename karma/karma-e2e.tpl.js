@@ -33,13 +33,17 @@ module.exports = function ( karma ) {
      */
     reporters: 'dots',
 
+    proxies: {
+      '/': 'http://localhost'
+    },
+
     /**
      * On which port should the browser connect, on which port is the test runner
      * operating, and what is the URL path for the browser to use.
      */
     port: 9020,
     runnerPort: 9102,
-    urlRoot: '/',
+    urlRoot: '/__e2e/',
 
     /**
      * Disable file watching by default.
@@ -64,6 +68,6 @@ module.exports = function ( karma ) {
      * open and the tests will automatically occur there during the build. This has
      * the aesthetic advantage of not launching a browser every time you save.
      */
-    browsers: ['PhantomJS']
+    browsers: []
   });
 };
