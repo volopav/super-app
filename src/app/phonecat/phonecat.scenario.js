@@ -1,4 +1,5 @@
 describe('Phone Catalog Module', function() {
+
   describe('Phone List view', function(){
 
     beforeEach(function() {
@@ -31,6 +32,12 @@ describe('Phone Catalog Module', function() {
           'MOTOROLA XOOM™',
           'Motorola XOOM™ with Wi-Fi'
         ]);
+    });
+
+    it('should render phone specific link', function() {
+      input('query').enter('nexus');
+      element('.phones li a').click();
+      expect(browser().location().url()).toBe('/phonecat/nexus-s');
     });
   });
 });

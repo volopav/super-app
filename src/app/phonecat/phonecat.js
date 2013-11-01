@@ -3,26 +3,27 @@ angular.module('SuperApp.phonecat', [
 ])
 
 .config(function config($stateProvider) {
-  $stateProvider.state('phonecat', {
-    url: '/phonecat',
-    views: {
-      "main": {
-        controller: 'PhoneListCtrl',
-        templateUrl: 'phonecat/templates/phonecat.tpl.html'
-      }
-    },
-    data: { pageTitle: 'Phone Catalog' }
-  })
-  .state('phonecat.phones', {
-    url: '/phones/:phoneId',
-    views: {
-      "main": {
-        templateUrl: 'phonecat/templates/phonecat-details.tpl.html',
-        controller: 'PhoneDetailsCtrl'
-      }
-    },
-    data: { pageTitle: 'Phone Details' }
-  });
+  $stateProvider
+    .state('phonecat', {
+      url: '/phonecat',
+      views: {
+        "main": {
+          controller: 'PhoneListCtrl',
+          templateUrl: 'phonecat/templates/phonecat.tpl.html'
+        }
+      },
+      data: { pageTitle: 'Phone Catalog' }
+    })
+    .state('phones', {
+      url: '/phonecat/:phoneId',
+      views: {
+        "main": {
+          templateUrl: 'phonecat/templates/phonecat-details.tpl.html',
+          controller: 'PhoneDetailsCtrl'
+        }
+      },
+      data: { pageTitle: 'Phone Details' }
+    });
 })
 
 .controller('PhoneListCtrl', function PhoneListCtrl($scope, $http) {
