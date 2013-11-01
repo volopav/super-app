@@ -4,7 +4,7 @@
       Search: <input ng-model="query">
     </div>
     <div class="span12">
-      <ul>
+      <ul class="phones">
         <li ng-repeat="phone in phones | filter:query">
           {{phone.name}}
           <p>{{phone.snippet}}</p>
