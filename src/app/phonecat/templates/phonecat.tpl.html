@@ -1,17 +1,20 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span4">
-      Search: <input ng-model="query">
-      Sort by:
-      <select ng-model="orderProp">
-        <option value="name">Alphabetical</option>
-        <option value="age">Newest</option>
-      </select>
+      <form>
+        Search: <input type="text" ng-model="query"><br>
+        Sort by:
+        <select ng-model="orderProp">
+          <option value="name">Alphabetical</option>
+          <option value="age">Newest</option>
+        </select>
+      </form>
     </div>
     <div class="span12">
       <ul class="phones">
-        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
-          {{phone.name}}
+        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
+          <a href="#{{url}}/phones/{{phone.id}}" class="thumb"><img ng-src="/sample-data/{{phone.imageUrl}}"></a>
+          <a href="#{{url}}/phones/{{phone.id}}">{{phone.name}}</a>
           <p>{{phone.snippet}}</p>
         </li>
       </ul>

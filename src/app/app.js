@@ -6,7 +6,8 @@ angular.module( 'SuperApp', [
   'SuperApp.todo',
   'SuperApp.phonecat',
   'ui.state',
-  'ui.route'
+  'ui.route',
+  'ui.router'
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
