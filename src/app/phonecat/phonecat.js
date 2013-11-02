@@ -33,8 +33,13 @@ angular.module('SuperApp.phonecat', [
 
   $scope.orderProp = 'age';
   $scope.url = '/phonecat';
+  $scope.urlDataPrefix = '/sample-data';
 })
 
-.controller( 'PhoneDetailsCtrl', function PhoneDetailsCtrl($scope, $stateParams) {
-  $scope.phoneId = $stateParams.phoneId;
+.controller( 'PhoneDetailsCtrl', function PhoneDetailsCtrl($scope, $stateParams, $http) {
+  $http.get('/sample-data/phones/' + $stateParams.phoneId + '.json').success(function(data) {
+    $scope.phone = data;
+  });
+
+  $scope.urlDataPrefix = '/sample-data';
 });

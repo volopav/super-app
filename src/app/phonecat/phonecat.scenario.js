@@ -47,4 +47,14 @@ describe('Phone Catalog Module', function() {
       expect(browser().location().url()).toBe('/home');
     });
   });
+
+  describe('Phone Detail view', function() {
+    beforeEach(function() {
+      browser().navigateTo(baseUrl + '#' + route + '/nexus-s');
+    });
+
+    it('should display placeholder with phoneId', function() {
+      expect(binding('phoneId')).toBe('nexus-s');
+    });
+  });
 });
