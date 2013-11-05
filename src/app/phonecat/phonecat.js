@@ -37,7 +37,9 @@ angular.module('SuperApp.phonecat', [
 })
 
 .controller( 'PhoneDetailsCtrl', function PhoneDetailsCtrl($scope, $stateParams, $http) {
-  $http.get('/sample-data/phones/' + $stateParams.phoneId + '.json').success(function(data) {
+  $scope.phoneId = $stateParams.phoneId;
+
+  $http.get('/sample-data/phones/' + $scope.phoneId + '.json').success(function(data) {
     $scope.phone = data;
   });
 

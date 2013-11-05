@@ -30,4 +30,25 @@ describe('Phone Catalog controllers', function() {
     }));
   });
 
+  describe('PhoneDetailsCtrl', function() {
+    var scope, $httpBackend, ctrl;
+
+    beforeEach(inject(function(_$httpBackend_, $rootScope, $stateParams, $controller) {
+      $httpBackend = _$httpBackend_;
+
+      $httpBackend.expectGET('/sample-data/phones/xyz.json').respond({name: 'phone xyz'});
+
+      $stateParams.phoneId = 'xyz';
+      scope = $rootScope.$new();
+      ctrl = $controller('PhoneDetailsCtrl', {$scope: scope});
+    }));
+
+    it('should fetch phone detail', function() {
+      expect(scope.phone).toBeUndefined();
+      $httpBackend.flush();
+
+      expect(scope.phone).toEqual({name: 'phone xyz'});
+    });
+  });
+
 });
