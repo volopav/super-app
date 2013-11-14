@@ -1,6 +1,6 @@
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span4">
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
       <form>
         Search: <input type="text" ng-model="query"><br>
         Sort by:
@@ -10,7 +10,7 @@
         </select>
       </form>
     </div>
-    <div class="span12">
+    <div class="col-md-8">
       <ul class="phones">
         <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
           <a href="#{{url}}/{{phone.id}}" class="thumb"><img ng-src="{{urlDataPrefix}}/{{phone.imageUrl}}"></a>

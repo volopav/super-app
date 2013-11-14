@@ -13,7 +13,7 @@
  * specified, as shown below.
  */
 angular.module( 'SuperApp.home', [
-  'ui.state',
+  'ui.router',
   'plusOne'
 ])
 

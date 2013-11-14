@@ -1,5 +1,5 @@
 angular.module('SuperApp.todo', [
-  'ui.state'
+  'ui.router'
 ])
 
 .config(function config($stateProvider) {
