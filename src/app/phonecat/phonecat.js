@@ -42,7 +42,12 @@ angular.module('SuperApp.phonecat', [
 
   $http.get('/sample-data/phones/' + $scope.phoneId + '.json').success(function(data) {
     $scope.phone = data;
+    $scope.mainImageUrl = data.images[0];
   });
+
+  $scope.setImage = function(imageUrl) {
+    $scope.mainImageUrl = imageUrl;
+  };
 
   $scope.urlDataPrefix = '/sample-data';
 });

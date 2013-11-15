@@ -36,7 +36,7 @@ describe('Phone Catalog controllers', function() {
     beforeEach(inject(function(_$httpBackend_, $rootScope, $stateParams, $controller) {
       $httpBackend = _$httpBackend_;
 
-      $httpBackend.expectGET('/sample-data/phones/xyz.json').respond({name: 'phone xyz'});
+      $httpBackend.expectGET('/sample-data/phones/xyz.json').respond({name: 'phone xyz', images: []});
 
       $stateParams.phoneId = 'xyz';
       scope = $rootScope.$new();
@@ -47,7 +47,7 @@ describe('Phone Catalog controllers', function() {
       expect(scope.phone).toBeUndefined();
       $httpBackend.flush();
 
-      expect(scope.phone).toEqual({name: 'phone xyz'});
+      expect(scope.phone).toEqual({name: 'phone xyz', images: []});
     });
   });
 
