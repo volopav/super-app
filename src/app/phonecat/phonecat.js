@@ -1,5 +1,6 @@
 angular.module('SuperApp.phonecat', [
-  'ui.router'
+  'ui.router',
+  'checkmark'
 ])
 
 .config(function config($stateProvider) {

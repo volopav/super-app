@@ -53,10 +53,6 @@ describe('Phone Catalog Module', function() {
       browser().navigateTo(baseUrl + '#' + route + '/nexus-s');
     });
 
-    it('should display placeholder with phoneId', function() {
-      expect(binding('phoneId')).toBe('nexus-s');
-    });
-
     it('should display nexus-s page', function() {
       expect(binding('phone.name')).toBe('Nexus S');
     });
