@@ -2,6 +2,14 @@ describe('Phone Catalog controllers', function() {
   var scope;
   var ctrl;
 
+  beforeEach(function() {
+    this.addMatchers({
+      toEqualData: function(expected) {
+        return angular.equals(this.actual, expected);
+      }
+    });
+  });
+
   beforeEach(module('SuperApp.phonecat'));
 
   describe('PhoneListCtrl', function() {
@@ -19,10 +27,10 @@ describe('Phone Catalog controllers', function() {
     }));
 
     it('should create phones moder with 2 phones fetched from xhr', inject(function($controller){
-      expect(scope.phones).toBeUndefined();
+      expect(scope.phones).toEqual([]);
       $httpBackend.flush();
 
-      expect(scope.phones).toEqual([{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
+      expect(scope.phones).toEqualData([{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
     }));
 
     it('should create phones collection with 3 phones', inject(function($controller){
@@ -44,10 +52,10 @@ describe('Phone Catalog controllers', function() {
     }));
 
     it('should fetch phone detail', function() {
-      expect(scope.phone).toBeUndefined();
+      expect(scope.phone).toEqualData({});
       $httpBackend.flush();
 
-      expect(scope.phone).toEqual({name: 'phone xyz', images: []});
+      expect(scope.phone).toEqualData({name: 'phone xyz', images: []});
     });
   });
 

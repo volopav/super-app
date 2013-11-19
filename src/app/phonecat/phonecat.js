@@ -1,6 +1,7 @@
 angular.module('SuperApp.phonecat', [
   'ui.router',
-  'checkmark'
+  'checkmark',
+  'phonecatServices'
 ])
 
 .config(function config($stateProvider) {
@@ -27,22 +28,19 @@ angular.module('SuperApp.phonecat', [
     });
 })
 
-.controller('PhoneListCtrl', function PhoneListCtrl($scope, $http) {
-  $http.get('/sample-data/phones/phones.json').success(function(data) {
-    $scope.phones = data;
-  });
+.controller('PhoneListCtrl', function PhoneListCtrl($scope, Phone) {
+  $scope.phones = Phone.query();
 
   $scope.orderProp = 'age';
   $scope.url = '/phonecat';
   $scope.urlDataPrefix = '/sample-data';
 })
 
-.controller( 'PhoneDetailsCtrl', function PhoneDetailsCtrl($scope, $stateParams, $http) {
+.controller( 'PhoneDetailsCtrl', function PhoneDetailsCtrl($scope, $stateParams, Phone) {
   $scope.phoneId = $stateParams.phoneId;
 
-  $http.get('/sample-data/phones/' + $scope.phoneId + '.json').success(function(data) {
-    $scope.phone = data;
-    $scope.mainImageUrl = data.images[0];
+  $scope.phone = Phone.get({ phoneId: $scope.phoneId}, function(phone) {
+    $scope.mainImageUrl = phone.images[0];
   });
 
   $scope.setImage = function(imageUrl) {
