@@ -5,6 +5,7 @@ angular.module( 'SuperApp', [
   'SuperApp.about',
   'SuperApp.todo',
   'SuperApp.phonecat',
+  'SuperApp.music',
   'ui.route',
   'ui.router'
 ])

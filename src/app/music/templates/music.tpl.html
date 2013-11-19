@@ -1,0 +1,16 @@
+<div class="music">
+  <div class="a-player">
+    <audio id="audioPlayerId" controls="controls">
+      <source ng-src="{{currentTrack}}" type="{{mimeType}}">
+    </audio>
+  </div>
+
+  <div class="playlist">
+    <ul>
+      <li ng-repeat="track in playlist.tracks">
+        <span ng-click="setTrack(track.url)">{{track.url}}</span>
+        <i>X</i>
+      </li>
+    </ul>
+  </div>
+</div>

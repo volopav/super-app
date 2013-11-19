@@ -1,23 +1,21 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <form>
-        Search: <input type="text" ng-model="query"><br>
-        Sort by:
-        <select ng-model="orderProp">
-          <option value="name">Alphabetical</option>
-          <option value="age">Newest</option>
-        </select>
-      </form>
-    </div>
-    <div class="col-md-8">
-      <ul class="phones">
-        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail phone-listing">
-          <a href="#{{url}}/{{phone.id}}" class="thumb"><img ng-src="{{urlDataPrefix}}/{{phone.imageUrl}}"></a>
-          <a href="#{{url}}/{{phone.id}}">{{phone.name}}</a>
-          <p>{{phone.snippet}}</p>
-        </li>
-      </ul>
-    </div>
+<div class="row">
+  <div class="col-md-3">
+    <form>
+      Search: <input type="text" ng-model="query"><br>
+      Sort by:
+      <select ng-model="orderProp">
+        <option value="name">Alphabetical</option>
+        <option value="age">Newest</option>
+      </select>
+    </form>
+  </div>
+  <div class="col-md-8">
+    <ul class="phones">
+      <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail phone-listing">
+        <a href="#{{url}}/{{phone.id}}" class="thumb"><img ng-src="{{urlDataPrefix}}/{{phone.imageUrl}}"></a>
+        <a href="#{{url}}/{{phone.id}}">{{phone.name}}</a>
+        <p>{{phone.snippet}}</p>
+      </li>
+    </ul>
   </div>
 </div>
