@@ -15,9 +15,7 @@ angular.module('SuperApp.music', ['ui.router'])
 })
 
 .controller('AudioPlayerCtrl', function($scope, $sce) {
-  var player = document.getElementById('audioPlayerId');
 
-  $scope.mimeType = 'audio/mpeg';
   $scope.playlist = {
     tracks: [
       {url: 'http://incompetech.com/music/royalty-free/mp3-royaltyfree/Call%20to%20Adventure.mp3'},
@@ -27,14 +25,24 @@ angular.module('SuperApp.music', ['ui.router'])
     ]
   };
 
-  $scope.currentTrack = $sce.trustAsResourceUrl($scope.playlist.tracks[0].url);
-
   $scope.setTrack = function(t) {
     $scope.currentTrack = $sce.trustAsResourceUrl(t);
   };
 
-  $scope.$watch('currentTrack', function() {
-    player.load();
-    player.play();
-  });
+  $scope.addTrack = function() {
+    $scope.playlist.tracks.push({ url: $scope.playlist.newTrack });
+    $scope.playlist.newTrack = '';
+  };
+
+  $scope.removeTrack = function(url) {
+    var tracks = $scope.playlist.tracks,
+        length = tracks.length;
+
+    for(var i = 0; i < length; i++) {
+      if(tracks[i].url === url) {
+        tracks.splice(i, 1);
+      }
+    }
+  };
+
 });
